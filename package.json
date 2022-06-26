@@ -1,5 +1,5 @@
 {
-  "name": "sequelize-migration-builder",
+  "name": "@tkottke90/sequelize-migration-builder",
   "version": "1.0.0",
   "description": "Sequelize helper tool to generate migrations",
   "main": "index.js",
