@@ -398,7 +398,7 @@ FieldBuilder.allowNull(true);
 
 ### Custom Input
 
-Allows for custom configuration not provided by this tool.  This function will throw an error if you attempt to 
+Allows for custom configuration not provided by this tool.  This function will throw an error if you attempt to pass a non-object.
 
 Usage: `FieldBuilder.customInput(input: Record<string, any>)`
 
@@ -498,6 +498,22 @@ up(queryInstance, Sequelize) {
 //    created_at: { type: Sequelize.DATE },
 //    updated_at: { type: Sequelize.DATE }
 //  }
+```
+
+If you wish to rename the columns, you an do so using normal Javascript techniques like destructuring:
+
+```js
+const { active, created_at, updated_at } = FieldBuilder.statusColumns();
+
+
+up(queryInstance, Sequelize) {
+  await queryInterface.createTable('Users', {
+    id: new FieldBuilder().primaryKey().output();
+
+    createdTimestamp: created_at,
+    updatedTimestamp: updated_at
+  });
+}
 ```
 
 ### Unique
