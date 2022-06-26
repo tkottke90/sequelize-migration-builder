@@ -20,5 +20,9 @@
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tkottke90/sequelize-migration-builder.git"
   }
 }
