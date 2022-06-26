@@ -77,10 +77,16 @@ module.exports = {
 
 ## Installation
 
-To install the package run the following in your project:
+The module is hosted in Github Packages.  To install using npm, first create a `.npmrc` file in your project:
 
 ```bash
-npm install --save-dev 
+echo "@tkottke90:registry=https://npm.pkg.github.com" > .npmrc
+```
+
+This will let NPM know that when you are looking for packages in the `@tkottke90` scope, to look in github packages instead of in NPM.  Then install the module using NPM:
+
+```bash
+npm install --save-dev @tkottke90/sequelize-migration-builder@1.0.0
 ```
 
 ## Usage
