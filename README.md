@@ -77,10 +77,28 @@ module.exports = {
 
 ## Installation
 
-The module is hosted in Github Packages.  To install using npm, first create a `.npmrc` file in your project:
+The module is available via either directly targeting the github repository in your `package.json` or by setting up a _custom registery_ using the `.npmrc` file.
+
+## Github
+
+If you are going to install the github repository directly, you can use the following command:
 
 ```bash
-echo "@tkottke90:registry=https://npm.pkg.github.com" > .npmrc
+npm install --save-dev https://github.com/tkottke90/sequelize-migration-builder
+```
+
+## NPM
+
+The module is hosted in Github Packages.  To install using npm, first you will need to create a _Personal Access Token_ which will be used by npm to authenticate to Github and download the package.
+
+You can create a token by following the [Github Documentation](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).  When creating the token you will specifically need to include the `read:packages` permission which allows the token to be used to download from Github.
+
+
+Next you will need to create a `.npmrc` file in your project, add your personal access token and define the where Github can find the module:
+
+```bash
+echo "//npm.pkg.github.com/:_authToken=<Personal Access Token>" >> /.npmrc
+echo "@tkottke90:registry=https://npm.pkg.github.com\n" >> .npmrc
 ```
 
 This will let NPM know that when you are looking for packages in the `@tkottke90` scope, to look in github packages instead of in NPM.  Then install the module using NPM:
