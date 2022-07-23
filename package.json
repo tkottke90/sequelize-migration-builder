@@ -6,8 +6,10 @@
   "scripts": {
     "coverage": "nyc --reporter=html mocha tests",
     "watch-tests": "mocha --watch tests",
-    "release": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && git push origin && git push origin --tags",
-    "release:patch": "changelog -p && npm version patch && npm run release"
+    "release": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && git push origin && git push origin --tags && npm publish",
+    "release:patch": "changelog -p && npm version patch && npm run release",
+    "release:minor": "changelog -m && npm version minor && npm run release",
+    "release:major": "changelog -M && npm version major && npm run release"
   },
   "keywords": [
     "sequelize",
