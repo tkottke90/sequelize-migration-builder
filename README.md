@@ -1,6 +1,6 @@
 # Sequelize Migration Builder
 
-![Tests](https://github.com/tkottke90/sequelize-migration-builder/actions/workflows/node.js.svg?branch=main)
+![Tests](https://github.com/tkottke90/sequelize-migration-builder/actions/workflows/node.js.yml/badge.svg?branch=main)
 
 This small module is designed to make Sequelize migrations files easier to manage by abstracting away boilerplate code that is used repeatedly and providing a builder object to construct the configuration.
 
