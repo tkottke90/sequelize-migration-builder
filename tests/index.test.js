@@ -194,12 +194,48 @@ describe('FieldBuilder', () => {
   });
 
   describe('#numberColumn', () => {
-    it('should set the type of the field as `Sequelize.FLOAT`', () => {
+    it('should set the type of the field as `Sequelize.INTEGER`', () => {
       const builder = new FieldBuilder();
 
       expect(builder.numberColumn().output())
+        .to.deep.eq({ type: Sequelize.INTEGER })
+    });
+
+    it('should set the type of the field as `Sequelize.BIGINT`', () => {
+      const builder = new FieldBuilder();
+
+      expect(builder.numberColumn('bigint').output())
+        .to.deep.eq({ type: Sequelize.BIGINT })
+    });
+
+    it('should set the type of the field as `Sequelize.DOUBLE`', () => {
+      const builder = new FieldBuilder();
+
+      expect(builder.numberColumn('double').output())
+        .to.deep.eq({ type: Sequelize.DOUBLE })
+    });
+    
+    it('should set the type of the field as `Sequelize.FLOAT`', () => {
+      const builder = new FieldBuilder();
+
+      expect(builder.numberColumn('float').output())
         .to.deep.eq({ type: Sequelize.FLOAT })
-    })
+    });
+
+    it('should set the type of the field as `Sequelize.INTEGER`', () => {
+      const builder = new FieldBuilder();
+
+      expect(builder.numberColumn('integer').output())
+        .to.deep.eq({ type: Sequelize.INTEGER })
+    });
+
+    it('should set the type of the field as `Sequelize.smallint`', () => {
+      const builder = new FieldBuilder();
+
+      expect(builder.numberColumn('smallint').output())
+        .to.deep.eq({ type: Sequelize.SMALLINT })
+    });
+    
   });
 
   describe('#optional', () => {

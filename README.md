@@ -318,9 +318,9 @@ field: FieldBuilder.jsonColumn().output();
 
 ### Number Column
 
-Marks a column for storing float values.
+Marks a column for various types of numbers. 
 
-Usage: `FieldBuilder.numberColumn()`
+Usage: `FieldBuilder.numberColumn(type?: string)`
 
 Example:
 ```js
@@ -328,9 +328,19 @@ field: FieldBuilder.numberColumn().output();
 
 // Output
 // field: {
-//   type: Sequelize.FLOAT
+//   type: Sequelize.INTEGER
 // }
 ```
+
+In addition to paramter-less, the function can also take a single parameter to assign various other number data types.  The list here is selected based on the [Sequelize documentation](https://sequelize.org/docs/v7/other-topics/other-data-types/#integers) by selecting the configurations with the most support.  If you wish to use another type of number column, use the [custom input](#custom-input) function.
+
+| Type | Output |
+| :-: | :-: |
+| 'bigint' | `Sequelize.BIGINT` |
+| 'double' | `Sequelize.DOUBLE` |
+| 'float' | `Sequelize.FLOAT` |
+| 'integer' | `Sequelize.INTEGER` |
+| 'smallint' | `Sequelize.SMALLINT` |
 
 ### Primary Key Column
 
