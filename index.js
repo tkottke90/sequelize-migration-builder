@@ -1,17 +1,9 @@
 const Sequelize = require('sequelize/lib/data-types');
 
 module.exports = class FieldBuilder {
-  fieldState = {};
-
-  /**
-   * Marks a column as allowing/disallowing null values
-   * @param {boolean} [allowNull=false]
-   * @returns {FieldBuilder} The builder instance
-   */
-  allowNull(allowNull = false) {
-    Object.assign(this.fieldState, { allowNull });
-    return this;
-  }
+  fieldState = {
+    allowNull: true
+  };
 
   /**
    * Sets the type of a column as a boolean
@@ -179,6 +171,15 @@ module.exports = class FieldBuilder {
       primaryKey: true,
       type: Sequelize.INTEGER,
     });
+    return this;
+  }
+
+  /**
+   * Marks a column as requiring a value
+   * @returns {FieldBuilder} The builder instance
+   */
+   required() {
+    Object.assign(this.fieldState, { allowNull: true });
     return this;
   }
 
