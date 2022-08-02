@@ -1,9 +1,7 @@
 const Sequelize = require('sequelize/lib/data-types');
 
 module.exports = class FieldBuilder {
-  fieldState = {
-    allowNull: true
-  };
+  fieldState = {};
 
   /**
    * Sets the type of a column as a boolean
@@ -153,6 +151,15 @@ module.exports = class FieldBuilder {
    */
   numberColumn() {
     Object.assign(this.fieldState, { type: Sequelize.FLOAT });
+    return this;
+  }
+
+  /**
+     * Marks a column as accepting a value or NULL
+     * @returns {FieldBuilder} The builder instance
+     */
+  optional() {
+    Object.assign(this.fieldState, { allowNull: false });
     return this;
   }
 

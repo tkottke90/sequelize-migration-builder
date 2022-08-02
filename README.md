@@ -459,11 +459,23 @@ field: new FieldBuilder().nonEmptyString().output();
 // }
 ```
 
+### Optional Column
+
+Sets the field as allowing NULL as a value.  Depending on your SQL dialect, you may or may not need this.  Check your dialect documentation for more details.
+
+Example:
+```js
+field: new FieldBuilder().optional().output();
+
+// Output
+// field: {
+//  allowNull: true
+// }
+```
+
 ### Required Column
 
-Investigating various database schemas, it would appear that by default fields will be populated with a `NULL` value unless the field is marked as required.
-
-To this end the initial state of the field will include the `allowNull` value set to true.  Essentially making the value in the field optional.  To make the field required, call the `required()` method:
+Sets the field as requiring a non-null value.  Depending on your SQL dialect, you may or may not need this.  Check your dialect documentation for more details.
 
 Example:
 ```js
