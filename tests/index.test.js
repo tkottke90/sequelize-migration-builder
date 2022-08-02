@@ -8,28 +8,6 @@ describe('FieldBuilder', () => {
     expect(new FieldBuilder()).to.be.instanceOf(FieldBuilder);
   });
 
-  describe('#allowNull', () => {
-    it('should produce a `false` configuration with no parameters', () => {
-      const builder = new FieldBuilder();
-      
-      const field = builder.allowNull(false).output();
-
-      expect(field).to.deep.eq({ allowNull: false })
-    });
-
-    it('should accept a single boolean parameter', () => {
-      const truthyBuilder = new FieldBuilder();
-      const falsyBuilder = new FieldBuilder();
-
-      const truthyField = truthyBuilder.allowNull(true).output();
-      const falsyField = falsyBuilder.allowNull(false).output();
-
-      expect(truthyField).to.deep.eq({ allowNull: true });
-      expect(falsyField).to.deep.eq({ allowNull: false })
-    });
-
-  });
-
   describe('#booleanColumn', () => {
     it('should set the type of the field as `Sequelize.BOOLEAN`', () => {
       const builder = new FieldBuilder();
@@ -224,6 +202,18 @@ describe('FieldBuilder', () => {
     })
   });
 
+  describe('#optional', () => {
+    it('should configure the field to allow NULL', () => {
+      const falsyBuilder = new FieldBuilder();
+
+      const falsyField = falsyBuilder.optional().output();
+
+
+      expect(falsyField).to.deep.eq({ allowNull: true })
+    });
+
+  });
+
   describe('#primaryKey', () => {
     it('should provide the primary key configurations', () => {
       const builder = new FieldBuilder();
@@ -231,6 +221,18 @@ describe('FieldBuilder', () => {
       expect(builder.primaryKey().output())
         .to.deep.eq({ type: Sequelize.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true })
     })
+  });
+
+  describe('#required', () => {
+    it('should configure the field to NOT allow NULL', () => {
+      const falsyBuilder = new FieldBuilder();
+
+      const falsyField = falsyBuilder.required().output();
+
+
+      expect(falsyField).to.deep.eq({ allowNull: false })
+    });
+
   });
 
   describe('#statusColumns', () => {
