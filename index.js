@@ -159,7 +159,7 @@ module.exports = class FieldBuilder {
      * @returns {FieldBuilder} The builder instance
      */
   optional() {
-    Object.assign(this.fieldState, { allowNull: false });
+    Object.assign(this.fieldState, { allowNull: true });
     return this;
   }
 
@@ -186,7 +186,7 @@ module.exports = class FieldBuilder {
    * @returns {FieldBuilder} The builder instance
    */
    required() {
-    Object.assign(this.fieldState, { allowNull: true });
+    Object.assign(this.fieldState, { allowNull: false });
     return this;
   }
 
@@ -197,8 +197,8 @@ module.exports = class FieldBuilder {
   static statusColumns() {
     return {
       active: new FieldBuilder().booleanColumn().output(),
-      created_at: new FieldBuilder().dateColumn().allowNull().output(),
-      updated_at: new FieldBuilder().dateColumn().allowNull().output(),
+      created_at: new FieldBuilder().dateColumn().required().output(),
+      updated_at: new FieldBuilder().dateColumn().required().output(),
     }
   }
 
