@@ -4,16 +4,6 @@ module.exports = class FieldBuilder {
   fieldState = {};
 
   /**
-   * Marks a column as allowing/disallowing null values
-   * @param {boolean} [allowNull=false]
-   * @returns {FieldBuilder} The builder instance
-   */
-  allowNull(allowNull = false) {
-    Object.assign(this.fieldState, { allowNull });
-    return this;
-  }
-
-  /**
    * Sets the type of a column as a boolean
    * @returns {FieldBuilder} The builder instance
    */
@@ -164,6 +154,15 @@ module.exports = class FieldBuilder {
     return this;
   }
 
+  /**
+     * Marks a column as accepting a value or NULL
+     * @returns {FieldBuilder} The builder instance
+     */
+  optional() {
+    Object.assign(this.fieldState, { allowNull: true });
+    return this;
+  }
+
   output() {
     return this.fieldState;
   }
@@ -183,14 +182,23 @@ module.exports = class FieldBuilder {
   }
 
   /**
+   * Marks a column as requiring a value
+   * @returns {FieldBuilder} The builder instance
+   */
+   required() {
+    Object.assign(this.fieldState, { allowNull: false });
+    return this;
+  }
+
+  /**
    * A map of generic columns that can be added to an existing 
    * @returns {{ active: {}, created_at: {}, updated_at: {} }} An object with pre-built columns
    */
   static statusColumns() {
     return {
       active: new FieldBuilder().booleanColumn().output(),
-      created_at: new FieldBuilder().dateColumn().allowNull().output(),
-      updated_at: new FieldBuilder().dateColumn().allowNull().output(),
+      created_at: new FieldBuilder().dateColumn().required().output(),
+      updated_at: new FieldBuilder().dateColumn().required().output(),
     }
   }
 

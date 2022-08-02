@@ -385,35 +385,6 @@ field: FieldBuilder.textColumn().output();
 
 The following functions are available on the FieldBuilder class instance and will apply specific configurations to the field
 
-### Allow Null
-
-Marks a column as either allowing or disallowing null values.  The function accepts 0 or 1 parameters.  When no parameters are provided, will set the `allowNull` property to *false*.  When a single boolean parameter is provided, it will set the `allowNull` property.
-
-Usage: `FieldBuilder.allowNull()`
-
-Example:
-```js
-// Default
-
-FieldBuilder.allowNull();
-
-// Output
-// {
-//   allowNull: false
-// }
-```
-
-```js
-// With Parameter
-
-FieldBuilder.allowNull(true);
-
-// Output
-// {
-//   allowNull: true
-// }
-```
-
 ### Custom Input
 
 Allows for custom configuration not provided by this tool.  This function will throw an error if you attempt to pass a non-object.
@@ -485,6 +456,34 @@ field: new FieldBuilder().nonEmptyString().output();
 //  validate: {
 //    notEmpty: true
 //  }
+// }
+```
+
+### Optional Column
+
+Sets the field as allowing NULL as a value.  Depending on your SQL dialect, you may or may not need this.  Check your dialect documentation for more details.
+
+Example:
+```js
+field: new FieldBuilder().optional().output();
+
+// Output
+// field: {
+//  allowNull: true
+// }
+```
+
+### Required Column
+
+Sets the field as requiring a non-null value.  Depending on your SQL dialect, you may or may not need this.  Check your dialect documentation for more details.
+
+Example:
+```js
+field: new FieldBuilder().required().output();
+
+// Output
+// field: {
+//  allowNull: false
 // }
 ```
 
