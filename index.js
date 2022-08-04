@@ -173,7 +173,18 @@ module.exports = class FieldBuilder {
     return this;
   }
 
+  /**
+   * Returns the result of the builder.  
+   * 
+   * This feature is deprecated as the class instance itself now acts 
+   * as the internal record.  Keeping this around for now for backwards
+   * compatibility.  But this step is no longer required
+   * 
+   * @deprecated
+   * @returns 
+   */
   output() {
+    // TODO Set a release for the final removal of this feature
     return this;
   }
 
