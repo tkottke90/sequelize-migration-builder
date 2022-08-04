@@ -52,17 +52,17 @@ module.exports = {
       id: new FieldBuilder().primaryKey().output(),
 
       firstName: new FieldBuilder()
-        .stringColumn()
+        .string()
         .allowNull()
         .output(),
 
       lastName: new FieldBuilder()
-        .stringColumn()
+        .string()
         .allowNull()
         .output(),
 
       email: new FieldBuilder()
-        .emailColumn()
+        .email()
         .allowNull()
         .unique()
         .output()
@@ -124,7 +124,7 @@ module.exports = {
       id: new FieldBuilder().primaryKey().output(),
 
       firstName: new FieldBuilder()
-        .stringColumn()
+        .string()
         .allowNull()
         .output(),
   },
@@ -141,11 +141,11 @@ At the core each column should instantiate a new instance of the `FieldBuilder` 
 firstName: new FieldBuilder()
 ```
 
-Once you have the class, you will have access to all the functions available to that class (see docs below for full list). For example, calling the `stringColumn()` and `allowNull()` will add the `Sequelize.STRING` type and set the `allowNull` property to false which results in a required string field:
+Once you have the class, you will have access to all the functions available to that class (see docs below for full list). For example, calling the `string()` and `allowNull()` will add the `Sequelize.STRING` type and set the `allowNull` property to false which results in a required string field:
 
 ```js
 firstName: new FieldBuilder()
-  .stringColumn()
+  .string()
   .allowNull()
 ```
 
@@ -153,7 +153,7 @@ Finally, the last function you will need to call is `output()`, which will outpu
 
 ```js
 firstName: new FieldBuilder()
-  .stringColumn()
+  .string()
   .allowNull()
   .output()
 
@@ -183,11 +183,11 @@ The following functions configure a column by setting the `type` property on the
 
 Marks a column for storing boolean values.
 
-Usage: `FieldBuilder.booleanColumn()`
+Usage: `FieldBuilder.boolean()`
 
 Example:
 ```js
-field: FieldBuilder.booleanColumn().output();
+field: FieldBuilder.boolean().output();
 
 // Output
 // field: {
@@ -199,11 +199,11 @@ field: FieldBuilder.booleanColumn().output();
 
 Marks a column for storing date values.  Note that this is the simplest date option provided by Sequelize.  Other date based types can be found in their [documentation](https://sequelize.org/docs/v7/other-topics/other-data-types/#dates).
 
-Usage: `FieldBuilder.dateColumn()`
+Usage: `FieldBuilder.date()`
 
 Example:
 ```js
-field: FieldBuilder.booleanColumn().output();
+field: FieldBuilder.boolean().output();
 
 // Output
 // field: {
@@ -215,11 +215,11 @@ field: FieldBuilder.booleanColumn().output();
 
 Marks the column as a string _and_ assigns the `isEmail` validation condition.  This is one of the many validators provided by sequelize
 
-Usage: `FieldBuilder.emailColumn()`
+Usage: `FieldBuilder.email()`
 
 Example:
 ```js
-field: FieldBuilder.booleanColumn().output();
+field: FieldBuilder.boolean().output();
 
 // Output
 // field: {
@@ -234,11 +234,11 @@ field: FieldBuilder.booleanColumn().output();
 
 Configures a column to accept a set of accepted values.  This is a list of strings either as a list of parameters or as an array of strings.
 
-Usage: `FieldBuilder.enumColumn(...options: string)`
+Usage: `FieldBuilder.enum(...options: string)`
 
 Example:
 ```js
-field: FieldBuilder.enumColumn('pending', 'active', 'complete').output();
+field: FieldBuilder.enum('pending', 'active', 'complete').output();
 
 // Output
 // field: {
@@ -249,7 +249,7 @@ field: FieldBuilder.enumColumn('pending', 'active', 'complete').output();
 
 ```js
 const status = ['pending', 'active', 'complete']
-field: FieldBuilder.enumColumn(status);
+field: FieldBuilder.enum(status);
 
 // Output
 // field: {
@@ -303,11 +303,11 @@ field: FieldBuilder.foreignKey('Users_Addresses', 'userId);
 
 Marks a column for storing JSON data.  Full details can be found in the [documentation](https://sequelize.org/docs/v6/other-topics/other-data-types/#json-sqlite-mysql-mariadb-and-postgresql-only).
 
-Usage: `FieldBuilder.jsonColumn(defaultValue?: Record<string,any>)`
+Usage: `FieldBuilder.json(defaultValue?: Record<string,any>)`
 
 Example:
 ```js
-field: FieldBuilder.jsonColumn().output();
+field: FieldBuilder.json().output();
 
 // Output
 // field: {
@@ -320,11 +320,11 @@ field: FieldBuilder.jsonColumn().output();
 
 Marks a column for various types of numbers. 
 
-Usage: `FieldBuilder.numberColumn(type?: string)`
+Usage: `FieldBuilder.number(type?: string)`
 
 Example:
 ```js
-field: FieldBuilder.numberColumn().output();
+field: FieldBuilder.number().output();
 
 // Output
 // field: {
@@ -350,7 +350,7 @@ Usage: `FieldBuilder.primaryKey()`
 
 Example:
 ```js
-field: FieldBuilder.numberColumn().output();
+field: FieldBuilder.number().output();
 
 // Output
 // field: {
@@ -365,11 +365,11 @@ field: FieldBuilder.numberColumn().output();
 
 Marks a column for storing smaller strings.  Per the [documentation](https://sequelize.org/docs/v7/other-topics/other-data-types/#strings), Sequelize will create a `VARCHAR` type with a 255 character max.
 
-Usage: `FieldBuilder.stringColumn()`
+Usage: `FieldBuilder.string()`
 
 Example:
 ```js
-field: FieldBuilder.stringColumn().output();
+field: FieldBuilder.string().output();
 
 // Output
 // field: {
@@ -381,11 +381,11 @@ field: FieldBuilder.stringColumn().output();
 
 Marks a column for storing larger strings.  Depending on your database, Sequelize will use that flavor syntax to generate the field.  The max size will depend on the database and it is recommended that you review the [documentation](https://sequelize.org/docs/v7/other-topics/other-data-types/#strings).
 
-Usage: `FieldBuilder.textColumn()`
+Usage: `FieldBuilder.text()`
 
 Example:
 ```js
-field: FieldBuilder.textColumn().output();
+field: FieldBuilder.text().output();
 
 // Output
 // field: {
@@ -435,7 +435,7 @@ Example:
 // Set default value on a string column to `None`
 
 FieldBuilder
-  .stringColumn()
+  .string()
   .defaultValue('None');
 
 // Output
@@ -580,8 +580,8 @@ up(queryInstance, Sequelize) {
   await queryInterface.createTable('Users', {
     id: new FieldBuilder().primaryKey().output();
 
-    name: new FieldBuilder().stringColumn().unique('user_info').output()
-    email: new FieldBuilder().emailColumn().unique('user_info')
+    name: new FieldBuilder().string().unique('user_info').output()
+    email: new FieldBuilder().email().unique('user_info')
   });
 }
 
