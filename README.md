@@ -49,23 +49,20 @@ const FieldBuilder = require('./utils/migration.utils');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {
-      id: new FieldBuilder().primaryKey().output(),
+      id: new FieldBuilder().primaryKey(),
 
       firstName: new FieldBuilder()
         .string()
-        .allowNull()
-        .output(),
+        .allowNull(),
 
       lastName: new FieldBuilder()
         .string()
-        .allowNull()
-        .output(),
+        .allowNull(),
 
       email: new FieldBuilder()
         .email()
         .allowNull()
-        .unique()
-        .output()
+        .unique(),
 
       password: new FieldBuilder()
     });
@@ -121,12 +118,11 @@ const FieldBuilder = require('./utils/migration.utils');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {
-      id: new FieldBuilder().primaryKey().output(),
+      id: new FieldBuilder().primaryKey(),
 
       firstName: new FieldBuilder()
         .string()
-        .allowNull()
-        .output(),
+        .allowNull(),
   },
 
   async down(queryInterface, Sequelize) {
@@ -147,15 +143,6 @@ Once you have the class, you will have access to all the functions available to 
 firstName: new FieldBuilder()
   .string()
   .allowNull()
-```
-
-Finally, the last function you will need to call is `output()`, which will output a JSON object based on state of the builder:
-
-```js
-firstName: new FieldBuilder()
-  .string()
-  .allowNull()
-  .output()
 
 
 // Output:
@@ -187,7 +174,7 @@ Usage: `FieldBuilder.boolean()`
 
 Example:
 ```js
-field: FieldBuilder.boolean().output();
+field: FieldBuilder.boolean();
 
 // Output
 // field: {
@@ -203,7 +190,7 @@ Usage: `FieldBuilder.date()`
 
 Example:
 ```js
-field: FieldBuilder.boolean().output();
+field: FieldBuilder.boolean();
 
 // Output
 // field: {
@@ -219,7 +206,7 @@ Usage: `FieldBuilder.email()`
 
 Example:
 ```js
-field: FieldBuilder.boolean().output();
+field: FieldBuilder.boolean();
 
 // Output
 // field: {
@@ -238,7 +225,7 @@ Usage: `FieldBuilder.enum(...options: string)`
 
 Example:
 ```js
-field: FieldBuilder.enum('pending', 'active', 'complete').output();
+field: FieldBuilder.enum('pending', 'active', 'complete');
 
 // Output
 // field: {
@@ -268,7 +255,7 @@ Example:
 ```js
 // Ties this table to another table called `Addresses`
 
-field: FieldBuilder.foreignKey('Addresses').output();
+field: FieldBuilder.foreignKey('Addresses');
 
 // Output
 // field: {
@@ -307,7 +294,7 @@ Usage: `FieldBuilder.json(defaultValue?: Record<string,any>)`
 
 Example:
 ```js
-field: FieldBuilder.json().output();
+field: FieldBuilder.json();
 
 // Output
 // field: {
@@ -324,7 +311,7 @@ Usage: `FieldBuilder.number(type?: string)`
 
 Example:
 ```js
-field: FieldBuilder.number().output();
+field: FieldBuilder.number();
 
 // Output
 // field: {
@@ -350,7 +337,7 @@ Usage: `FieldBuilder.primaryKey()`
 
 Example:
 ```js
-field: FieldBuilder.number().output();
+field: FieldBuilder.number();
 
 // Output
 // field: {
@@ -369,7 +356,7 @@ Usage: `FieldBuilder.string()`
 
 Example:
 ```js
-field: FieldBuilder.string().output();
+field: FieldBuilder.string();
 
 // Output
 // field: {
@@ -385,7 +372,7 @@ Usage: `FieldBuilder.text()`
 
 Example:
 ```js
-field: FieldBuilder.text().output();
+field: FieldBuilder.text();
 
 // Output
 // field: {
@@ -461,7 +448,7 @@ Usage: `FieldBuilder.nonEmptyString()`
 
 Example:
 ```js
-field: new FieldBuilder().nonEmptyString().output();
+field: new FieldBuilder().nonEmptyString();
 
 // Output
 // field: {
@@ -477,7 +464,7 @@ Sets the field as allowing NULL as a value.  Depending on your SQL dialect, you 
 
 Example:
 ```js
-field: new FieldBuilder().optional().output();
+field: new FieldBuilder().optional();
 
 // Output
 // field: {
@@ -491,7 +478,7 @@ Sets the field as requiring a non-null value.  Depending on your SQL dialect, yo
 
 Example:
 ```js
-field: new FieldBuilder().required().output();
+field: new FieldBuilder().required();
 
 // Output
 // field: {
@@ -509,7 +496,7 @@ Example:
 ```js
 up(queryInstance, Sequelize) {
   await queryInterface.createTable('Users', {
-    id: new FieldBuilder().primaryKey().output();
+    id: new FieldBuilder().primaryKey();
 
     ...FieldBuilder.statusColumns()
   });
@@ -537,7 +524,7 @@ const { active, created_at, updated_at } = FieldBuilder.statusColumns();
 
 up(queryInstance, Sequelize) {
   await queryInterface.createTable('Users', {
-    id: new FieldBuilder().primaryKey().output();
+    id: new FieldBuilder().primaryKey();
 
     createdTimestamp: created_at,
     updatedTimestamp: updated_at
@@ -553,7 +540,7 @@ There are 2 forms of uniqueness.  The first one is column level uniqueness.  To 
 
 ```js
 
-field: new FieldBuilder().unique().output();
+field: new FieldBuilder().unique();
 
 // Output:
 //  {
@@ -565,7 +552,7 @@ field: new FieldBuilder().unique().output();
 Alternatively you can create named constraints by passing a string constraint name:
 
 ```js
-field: new FieldBuilder().unique('user_info').output();
+field: new FieldBuilder().unique('user_info');
 
 // Output:
 //  {
@@ -578,9 +565,9 @@ Named constraints can come in handy when you are building out tables that requir
 ```js
 up(queryInstance, Sequelize) {
   await queryInterface.createTable('Users', {
-    id: new FieldBuilder().primaryKey().output();
+    id: new FieldBuilder().primaryKey();
 
-    name: new FieldBuilder().string().unique('user_info').output()
+    name: new FieldBuilder().string().unique('user_info')
     email: new FieldBuilder().email().unique('user_info')
   });
 }
