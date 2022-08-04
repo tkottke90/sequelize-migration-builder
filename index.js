@@ -7,7 +7,7 @@ module.exports = class FieldBuilder {
    * Sets the type of a column as a boolean
    * @returns {FieldBuilder} The builder instance
    */
-  booleanColumn() {
+  boolean() {
     Object.assign(this.fieldState, { type: Sequelize.BOOLEAN });
     return this;
   }
@@ -30,7 +30,7 @@ module.exports = class FieldBuilder {
    * Sets the type of a column as a date
    * @returns {FieldBuilder} The builder instance 
    */
-  dateColumn() {
+  date() {
     Object.assign(this.fieldState, { type: Sequelize.DATE });
     return this;
   }
@@ -53,7 +53,7 @@ module.exports = class FieldBuilder {
    * Applies the STRING type and email validation flag to the column
    * @returns {FieldBuilder} The builder instance
    */
-  emailColumn() {
+  email() {
     Object.assign(this.fieldState, {
       type: Sequelize.STRING
     });
@@ -76,7 +76,7 @@ module.exports = class FieldBuilder {
    * @param {string[]} options List of valid string options 
    * @returns {FieldBuilder} The builder instance
    */
-  enumColumn(...options) {
+  enum(...options) {
     const values = options.flat();
 
     if (!values.length) {
@@ -118,7 +118,7 @@ module.exports = class FieldBuilder {
    * @param {Record<string, any>} [defaultValue={}] Default value to be assigned to fields 
    * @returns {FieldBuilder} The builder instance 
    */
-  jsonColumn(defaultValue = {}) {
+  json(defaultValue = {}) {
 
     if (typeof defaultValue !== 'object') {
       throw new Error('Default value must be an object');
@@ -207,13 +207,13 @@ module.exports = class FieldBuilder {
    */
   static statusColumns() {
     return {
-      active: new FieldBuilder().booleanColumn().output(),
-      created_at: new FieldBuilder().dateColumn().required().output(),
-      updated_at: new FieldBuilder().dateColumn().required().output(),
+      active: new FieldBuilder().boolean().output(),
+      created_at: new FieldBuilder().date().required().output(),
+      updated_at: new FieldBuilder().date().required().output(),
     }
   }
 
-  stringColumn() {
+  string() {
     Object.assign(this.fieldState, {
       type: Sequelize.STRING,
       default: "",
@@ -221,7 +221,7 @@ module.exports = class FieldBuilder {
     return this;
   }
 
-  textColumn() {
+  text() {
     Object.assign(this.fieldState, {
       type: Sequelize.TEXT,
       default: "",
