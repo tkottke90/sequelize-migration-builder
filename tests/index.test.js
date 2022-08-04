@@ -12,7 +12,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.BOOLEAN`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.booleanColumn().output())
+      expect(builder.boolean().output())
         .to.deep.eq({ type: Sequelize.BOOLEAN })
     })
   });
@@ -39,7 +39,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.DATE`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.dateColumn().output())
+      expect(builder.date().output())
         .to.deep.eq({ type: Sequelize.DATE })
     })
   });
@@ -63,14 +63,14 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.STRING` and the email validation', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.emailColumn().output())
+      expect(builder.email().output())
         .to.deep.eq({ type: Sequelize.STRING, validate: { isEmail: true } });
     });
 
     it('should append to the validate object when one already exists', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.nonEmptyString().emailColumn().output())
+      expect(builder.nonEmptyString().email().output())
         .to.deep.eq({ type: Sequelize.STRING, validate: { notEmpty: true, isEmail: true } });
     });
   });
@@ -79,7 +79,7 @@ describe('FieldBuilder', () => {
     it('should accept a list of params and apply them', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.enumColumn('pending', 'active', 'complete').output())
+      expect(builder.enum('pending', 'active', 'complete').output())
         .to.deep.eq({ type: Sequelize.ENUM, values: [ 'pending', 'active', 'complete' ] });
     });
 
@@ -87,14 +87,14 @@ describe('FieldBuilder', () => {
       const builder = new FieldBuilder();
       const statusArray = ['pending', 'active', 'complete'];
 
-      expect(builder.enumColumn(statusArray).output())
+      expect(builder.enum(statusArray).output())
         .to.deep.eq({ type: Sequelize.ENUM, values: [ 'pending', 'active', 'complete' ] });
     });
 
     it('should throw an error if there are no items', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.enumColumn).to.throw('Enums cannot be empty', []);
+      expect(builder.enum).to.throw('Enums cannot be empty', []);
     });
   });
 
@@ -143,7 +143,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.JSON`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.jsonColumn().output())
+      expect(builder.json().output())
         .to.deep.eq({ type: Sequelize.JSON, default: {} });
     });
 
@@ -151,25 +151,25 @@ describe('FieldBuilder', () => {
       const builder = new FieldBuilder();
 
       try {
-        builder.jsonColumn('default')
+        builder.json('default')
       } catch (error) {
         expect(error.message).to.be.eq('Default value must be an object');
       }
 
       try {
-        builder.jsonColumn(0)
+        builder.json(0)
       } catch (error) {
         expect(error.message).to.be.eq('Default value must be an object');
       }
 
       try {
-        builder.jsonColumn()
+        builder.json()
       } catch (error) {
         expect(error.message).to.be.eq('Default value must be an object');
       }
 
       try {
-        builder.jsonColumn(null)
+        builder.json(null)
       } catch (error) {
         expect(error.message).to.be.eq('Default value must be an object');
       }
@@ -188,7 +188,7 @@ describe('FieldBuilder', () => {
     it('should append to the validate object when one already exists', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.emailColumn().nonEmptyString().output())
+      expect(builder.email().nonEmptyString().output())
         .to.deep.eq({ type: Sequelize.STRING, validate: { notEmpty: true, isEmail: true } });
     });
   });
@@ -197,42 +197,42 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.INTEGER`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.numberColumn().output())
+      expect(builder.number().output())
         .to.deep.eq({ type: Sequelize.INTEGER })
     });
 
     it('should set the type of the field as `Sequelize.BIGINT`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.numberColumn('bigint').output())
+      expect(builder.number('bigint').output())
         .to.deep.eq({ type: Sequelize.BIGINT })
     });
 
     it('should set the type of the field as `Sequelize.DOUBLE`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.numberColumn('double').output())
+      expect(builder.number('double').output())
         .to.deep.eq({ type: Sequelize.DOUBLE })
     });
     
     it('should set the type of the field as `Sequelize.FLOAT`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.numberColumn('float').output())
+      expect(builder.number('float').output())
         .to.deep.eq({ type: Sequelize.FLOAT })
     });
 
     it('should set the type of the field as `Sequelize.INTEGER`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.numberColumn('integer').output())
+      expect(builder.number('integer').output())
         .to.deep.eq({ type: Sequelize.INTEGER })
     });
 
     it('should set the type of the field as `Sequelize.smallint`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.numberColumn('smallint').output())
+      expect(builder.number('smallint').output())
         .to.deep.eq({ type: Sequelize.SMALLINT })
     });
     
@@ -285,7 +285,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.STRING`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.stringColumn().output())
+      expect(builder.string().output())
         .to.deep.eq({ type: Sequelize.STRING, default: "" })
     })
   });
@@ -294,7 +294,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.TEXT`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.textColumn().output())
+      expect(builder.text().output())
         .to.deep.eq({ type: Sequelize.TEXT, default: "" })
     })
   });
