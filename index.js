@@ -147,10 +147,21 @@ module.exports = class FieldBuilder {
 
   /**
    * Sets the type of the column to `Sequelize.FLOAT`
+   * @param { 'bigint' | 'double' | 'float' | 'integer' | 'smallint'} [typeSelection] The type of integer
    * @returns {FieldBuilder} The builder instance 
    */
-  numberColumn() {
-    Object.assign(this.fieldState, { type: Sequelize.FLOAT });
+  numberColumn(typeSelection = 'integer') {
+    const typeMap = {
+      'bigint': Sequelize.BIGINT,
+      'double': Sequelize.DOUBLE,
+      'float': Sequelize.FLOAT,
+      'integer': Sequelize.INTEGER,
+      'smallint': Sequelize.SMALLINT
+    }
+
+    const type = typeMap[typeSelection] ?? typeMap.integer;
+
+    Object.assign(this.fieldState, { type });
     return this;
   }
 
