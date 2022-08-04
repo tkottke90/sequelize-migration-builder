@@ -150,7 +150,7 @@ module.exports = class FieldBuilder {
    * @param { 'bigint' | 'double' | 'float' | 'integer' | 'smallint'} [typeSelection] The type of integer
    * @returns {FieldBuilder} The builder instance 
    */
-  numberColumn(typeSelection = 'integer') {
+  number(typeSelection = 'integer') {
     const typeMap = {
       'bigint': Sequelize.BIGINT,
       'double': Sequelize.DOUBLE,

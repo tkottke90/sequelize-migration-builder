@@ -94,7 +94,7 @@ describe('FieldBuilder', () => {
     it('should throw an error if there are no items', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.enumColumn).to.throw('Enums cannot be empty', []);
+      expect(builder.enum).to.throw('Enums cannot be empty', []);
     });
   });
 
