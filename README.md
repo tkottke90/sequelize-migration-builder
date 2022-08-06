@@ -190,7 +190,7 @@ Usage: `FieldBuilder.date()`
 
 Example:
 ```js
-field: FieldBuilder.boolean();
+field: FieldBuilder.date();
 
 // Output
 // field: {
@@ -206,7 +206,7 @@ Usage: `FieldBuilder.email()`
 
 Example:
 ```js
-field: FieldBuilder.boolean();
+field: FieldBuilder.email();
 
 // Output
 // field: {
@@ -329,6 +329,16 @@ In addition to paramter-less, the function can also take a single parameter to a
 | 'integer' | `Sequelize.INTEGER` |
 | 'smallint' | `Sequelize.SMALLINT` |
 
+Example:
+```js
+field: FieldBuilder.number('double');
+
+// Output
+// field: {
+//   type: Sequelize.DOUBLE
+// }
+```
+
 ### Primary Key Column
 
 Configures the column as the primary key for the record.  This includes setting the auto increment flag and identifying the column as the primary key.
@@ -337,7 +347,7 @@ Usage: `FieldBuilder.primaryKey()`
 
 Example:
 ```js
-field: FieldBuilder.number();
+field: FieldBuilder.primaryKey();
 
 // Output
 // field: {
@@ -415,7 +425,7 @@ FieldBuilder.customInput(true);
 
 Configures a default value for the field.  Note that this is not type checked against the fields `type` value.
 
-Usage: `FieldBuilder.defaultValue(value: string)`
+Usage: `FieldBuilder.defaultValue(value: any)`
 
 Example:
 ```js
