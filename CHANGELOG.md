@@ -1,3 +1,26 @@
+## 2.0.0 (2022-08-06)
+
+##### Chores
+
+*  Update release scripts ([31008c94](https://github.com/tkottke90/sequelize-migration-builder/commit/31008c94ccabaa6f37b2e668603e281526dd333c))
+
+##### Documentation Changes
+
+*  Fix some of the documentation that was incorrect ([9fdd781a](https://github.com/tkottke90/sequelize-migration-builder/commit/9fdd781a0b6b263c197ea20d727093de1427b99b))
+*  Add build badge ([3d532b3d](https://github.com/tkottke90/sequelize-migration-builder/commit/3d532b3d048b78d6d79dde0ae5974829bf5c6b9b))
+
+##### Other Changes
+
+*  Remove Output Fn Requirement ([#9](https://github.com/tkottke90/sequelize-migration-builder/pull/9)) ([24dc8680](https://github.com/tkottke90/sequelize-migration-builder/commit/24dc8680d4de6d0213c50a3251989f06991312b8))
+* tkottke90/sequelize-migration-builder ([40209d52](https://github.com/tkottke90/sequelize-migration-builder/commit/40209d52e17dbe32b89597de67aef7c0b9c7ee13))
+
+##### Refactors
+
+*  Run test on push to main ([068ea044](https://github.com/tkottke90/sequelize-migration-builder/commit/068ea044ba07e116066b8afd54298a958cf73faa))
+*  Rename testing job ([e2fb96e4](https://github.com/tkottke90/sequelize-migration-builder/commit/e2fb96e46a5eb1e9c232efcd9f20b29d600a23c3))
+*  Fix badge path url ([e0b37c7c](https://github.com/tkottke90/sequelize-migration-builder/commit/e0b37c7c9f15bf2892625fb045c817e35c3bec8d))
+*  Specify which branches to run on ([#6](https://github.com/tkottke90/sequelize-migration-builder/pull/6)) ([ca89d6b3](https://github.com/tkottke90/sequelize-migration-builder/commit/ca89d6b38de9cacaed474492e2de34ad7a34d3c7))
+
 #### 1.0.1 (2022-07-23)
 
 ##### Chores
