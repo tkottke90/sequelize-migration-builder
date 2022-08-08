@@ -1,3 +1,11 @@
+#### 2.0.1 (2022-08-08)
+
+##### Refactors
+
+*  Add back output method ([3f753c6f](https://github.com/tkottke90/sequelize-migration-builder/commit/3f753c6f4924948826e15499a12c61f403f8033b))
+*  Revert serialization change ([e40335ad](https://github.com/tkottke90/sequelize-migration-builder/commit/e40335ad0c83eeb09019e8a53ae2f98f357ee6bd))
+*  Re-enable output(); ([34914659](https://github.com/tkottke90/sequelize-migration-builder/commit/349146594a82d45cc09748dd4025f4900d9f1bdd))
+
 ## 2.0.0 (2022-08-06)
 
 ##### Chores
