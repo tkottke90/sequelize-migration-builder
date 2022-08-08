@@ -53,18 +53,21 @@ module.exports = {
 
       firstName: new FieldBuilder()
         .string()
-        .allowNull(),
+        .allowNull()
+        .output(),
 
       lastName: new FieldBuilder()
         .string()
-        .allowNull(),
+        .allowNull()
+        .output(),
 
       email: new FieldBuilder()
         .email()
         .allowNull()
-        .unique(),
+        .unique()
+        .output(),
 
-      password: new FieldBuilder()
+      password: new FieldBuilder().output()
     });
   },
 
@@ -122,7 +125,8 @@ module.exports = {
 
       firstName: new FieldBuilder()
         .string()
-        .allowNull(),
+        .required()
+        .output(),
   },
 
   async down(queryInterface, Sequelize) {
@@ -137,12 +141,21 @@ At the core each column should instantiate a new instance of the `FieldBuilder` 
 firstName: new FieldBuilder()
 ```
 
-Once you have the class, you will have access to all the functions available to that class (see docs below for full list). For example, calling the `string()` and `allowNull()` will add the `Sequelize.STRING` type and set the `allowNull` property to false which results in a required string field:
+Once you have the class, you will have access to all the functions available to that class (see docs below for full list). For example, calling the `string()` and `optional()` will add the `Sequelize.STRING` type and set the `optional` property to false which results in a required string field:
 
 ```js
 firstName: new FieldBuilder()
   .string()
-  .allowNull()
+  .optional()
+```
+
+Finally call the `output` method to serialize to output the data to the property;
+
+```js
+firstName: new FieldBuilder()
+  .string()
+  .optional()
+  .output()
 
 
 // Output:
@@ -506,7 +519,7 @@ Example:
 ```js
 up(queryInstance, Sequelize) {
   await queryInterface.createTable('Users', {
-    id: new FieldBuilder().primaryKey();
+    id: new FieldBuilder().primaryKey().output();
 
     ...FieldBuilder.statusColumns()
   });

@@ -12,7 +12,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.BOOLEAN`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.boolean())
+      expect(builder.boolean().output())
         .to.deep.eq({ type: Sequelize.BOOLEAN })
     })
   });
@@ -22,7 +22,7 @@ describe('FieldBuilder', () => {
       const builder = new FieldBuilder();
       const customConfig = { type: Sequelize.JSONB }
 
-      expect(builder.customInput(customConfig))
+      expect(builder.customInput(customConfig).output())
         .to.deep.eq(customConfig);
     });
 
@@ -39,7 +39,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.DATE`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.date())
+      expect(builder.date().output())
         .to.deep.eq({ type: Sequelize.DATE })
     })
   });
@@ -48,7 +48,7 @@ describe('FieldBuilder', () => {
     it('should set the `defaultValue` to the provided input', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.defaultValue('N/A'))
+      expect(builder.defaultValue('N/A').output())
         .to.deep.eq({ default: 'N/A' });
     });
 
@@ -63,14 +63,14 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.STRING` and the email validation', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.email())
+      expect(builder.email().output())
         .to.deep.eq({ type: Sequelize.STRING, validate: { isEmail: true } });
     });
 
     it('should append to the validate object when one already exists', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.nonEmptyString().email())
+      expect(builder.nonEmptyString().email().output())
         .to.deep.eq({ type: Sequelize.STRING, validate: { notEmpty: true, isEmail: true } });
     });
   });
@@ -79,7 +79,7 @@ describe('FieldBuilder', () => {
     it('should accept a list of params and apply them', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.enum('pending', 'active', 'complete'))
+      expect(builder.enum('pending', 'active', 'complete').output())
         .to.deep.eq({ type: Sequelize.ENUM, values: [ 'pending', 'active', 'complete' ] });
     });
 
@@ -87,7 +87,7 @@ describe('FieldBuilder', () => {
       const builder = new FieldBuilder();
       const statusArray = ['pending', 'active', 'complete'];
 
-      expect(builder.enum(statusArray))
+      expect(builder.enum(statusArray).output())
         .to.deep.eq({ type: Sequelize.ENUM, values: [ 'pending', 'active', 'complete' ] });
     });
 
@@ -102,7 +102,7 @@ describe('FieldBuilder', () => {
     it('should accept a single parameter with the table name', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.foreignKey('Addresses'))
+      expect(builder.foreignKey('Addresses').output())
         .to.deep.eq({
           type: Sequelize.INTEGER,
           references: {
@@ -125,7 +125,7 @@ describe('FieldBuilder', () => {
     it('should accept 2 parameters for the table name and target column', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.foreignKey('User_Addresses', 'userId'))
+      expect(builder.foreignKey('User_Addresses', 'userId').output())
         .to.deep.eq({
           type: Sequelize.INTEGER,
           references: {
@@ -143,7 +143,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.JSON`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.json())
+      expect(builder.json().output())
         .to.deep.eq({ type: Sequelize.JSON, default: {} });
     });
 
@@ -181,14 +181,14 @@ describe('FieldBuilder', () => {
     it('should set `notEmpty` validator flag to true', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.nonEmptyString())
+      expect(builder.nonEmptyString().output())
         .to.deep.eq({ validate: { notEmpty: true } });
     });
 
     it('should append to the validate object when one already exists', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.email().nonEmptyString())
+      expect(builder.email().nonEmptyString().output())
         .to.deep.eq({ type: Sequelize.STRING, validate: { notEmpty: true, isEmail: true } });
     });
   });
@@ -197,42 +197,42 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.INTEGER`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.number())
+      expect(builder.number().output())
         .to.deep.eq({ type: Sequelize.INTEGER })
     });
 
     it('should set the type of the field as `Sequelize.BIGINT`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.number('bigint'))
+      expect(builder.number('bigint').output())
         .to.deep.eq({ type: Sequelize.BIGINT })
     });
 
     it('should set the type of the field as `Sequelize.DOUBLE`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.number('double'))
+      expect(builder.number('double').output())
         .to.deep.eq({ type: Sequelize.DOUBLE })
     });
     
     it('should set the type of the field as `Sequelize.FLOAT`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.number('float'))
+      expect(builder.number('float').output())
         .to.deep.eq({ type: Sequelize.FLOAT })
     });
 
     it('should set the type of the field as `Sequelize.INTEGER`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.number('integer'))
+      expect(builder.number('integer').output())
         .to.deep.eq({ type: Sequelize.INTEGER })
     });
 
     it('should set the type of the field as `Sequelize.smallint`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.number('smallint'))
+      expect(builder.number('smallint').output())
         .to.deep.eq({ type: Sequelize.SMALLINT })
     });
     
@@ -242,7 +242,7 @@ describe('FieldBuilder', () => {
     it('should configure the field to allow NULL', () => {
       const falsyBuilder = new FieldBuilder();
 
-      const falsyField = falsyBuilder.optional();
+      const falsyField = falsyBuilder.optional().output();
 
 
       expect(falsyField).to.deep.eq({ allowNull: true })
@@ -254,7 +254,7 @@ describe('FieldBuilder', () => {
     it('should provide the primary key configurations', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.primaryKey())
+      expect(builder.primaryKey().output())
         .to.deep.eq({ type: Sequelize.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true })
     })
   });
@@ -263,7 +263,7 @@ describe('FieldBuilder', () => {
     it('should configure the field to NOT allow NULL', () => {
       const falsyBuilder = new FieldBuilder();
 
-      const falsyField = falsyBuilder.required();
+      const falsyField = falsyBuilder.required().output();
 
 
       expect(falsyField).to.deep.eq({ allowNull: false })
@@ -285,7 +285,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.STRING`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.string())
+      expect(builder.string().output())
         .to.deep.eq({ type: Sequelize.STRING, default: "" })
     })
   });
@@ -294,7 +294,7 @@ describe('FieldBuilder', () => {
     it('should set the type of the field as `Sequelize.TEXT`', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.text())
+      expect(builder.text().output())
         .to.deep.eq({ type: Sequelize.TEXT, default: "" })
     })
   });
@@ -303,14 +303,14 @@ describe('FieldBuilder', () => {
     it('should set the unique flag to true', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.unique())
+      expect(builder.unique().output())
         .to.deep.eq({ unique: true })
     })
 
     it('should set the unique flag to the input value', () => {
       const builder = new FieldBuilder();
 
-      expect(builder.unique('user_info'))
+      expect(builder.unique('user_info').output())
         .to.deep.eq({ unique: 'user_info' })
     })
 
