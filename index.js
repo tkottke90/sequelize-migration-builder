@@ -212,9 +212,9 @@ module.exports = class FieldBuilder {
    */
   static statusColumns() {
     return {
-      active: new FieldBuilder().boolean(),
-      created_at: new FieldBuilder().date().required(),
-      updated_at: new FieldBuilder().date().required(),
+      active: new FieldBuilder().boolean().required().output(),
+      created_at: new FieldBuilder().date().required().output(),
+      updated_at: new FieldBuilder().date().required().output(),
     }
   }
 
