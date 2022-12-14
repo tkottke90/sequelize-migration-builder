@@ -1,15 +1,12 @@
 const Sequelize = require('sequelize/lib/data-types');
 
 module.exports = class FieldBuilder {
-  state = {};
-
-
   /**
    * Sets the type of a column as a boolean
    * @returns {FieldBuilder} The builder instance
    */
   boolean() {
-    Object.assign(this.state, { type: Sequelize.BOOLEAN });
+    Object.assign(this, { type: Sequelize.BOOLEAN });
     return this;
   }
 
@@ -22,7 +19,7 @@ module.exports = class FieldBuilder {
       throw new Error('Invalid custom input');
     }
 
-    Object.assign(this.state, input);
+    Object.assign(this, input);
 
     return this;
   }
@@ -32,7 +29,7 @@ module.exports = class FieldBuilder {
    * @returns {FieldBuilder} The builder instance 
    */
   date() {
-    Object.assign(this.state, { type: Sequelize.DATE });
+    Object.assign(this, { type: Sequelize.DATE });
     return this;
   }
 
@@ -46,7 +43,7 @@ module.exports = class FieldBuilder {
       throw new Error('Default value must be defined')
     }
 
-    Object.assign(this.state, { default: value });
+    Object.assign(this, { default: value });
     return this;
   }
 
@@ -55,7 +52,7 @@ module.exports = class FieldBuilder {
    * @returns {FieldBuilder} The builder instance
    */
   email() {
-    Object.assign(this.state, {
+    Object.assign(this, {
       type: Sequelize.STRING
     });
 
@@ -63,10 +60,10 @@ module.exports = class FieldBuilder {
       isEmail: true,
     };
 
-    if (this.state.validate) {
-      Object.assign(this.state.validate, validate);
+    if (this.validate) {
+      Object.assign(this.validate, validate);
     } else {
-      Object.assign(this.state, { validate });
+      Object.assign(this, { validate });
     }
 
     return this;
@@ -84,7 +81,7 @@ module.exports = class FieldBuilder {
       throw new Error('Enums cannot be empty');
     }
 
-    Object.assign(this.state, {
+    Object.assign(this, {
       type: Sequelize.ENUM,
       values,
     });
@@ -102,7 +99,7 @@ module.exports = class FieldBuilder {
       throw new Error('A model name must be provided for a foreign key constraint');
     }
 
-    Object.assign(this.state, {
+    Object.assign(this, {
       type: Sequelize.INTEGER,
       references: {
         model: {
@@ -125,7 +122,7 @@ module.exports = class FieldBuilder {
       throw new Error('Default value must be an object');
     }
 
-    Object.assign(this.state, {
+    Object.assign(this, {
       type: Sequelize.JSON,
       default: defaultValue
     });
@@ -137,10 +134,10 @@ module.exports = class FieldBuilder {
    * @returns {FieldBuilder} The builder instance 
    */
   nonEmptyString() {
-    if (this.state.validate) {
-      Object.assign(this.state.validate, { notEmpty: true });
+    if (this.validate) {
+      Object.assign(this.validate, { notEmpty: true });
     } else {
-      Object.assign(this.state, { validate: { notEmpty: true } });
+      Object.assign(this, { validate: { notEmpty: true } });
     }
 
     return this;
@@ -162,7 +159,7 @@ module.exports = class FieldBuilder {
 
     const type = typeMap[typeSelection] ?? typeMap.integer;
 
-    Object.assign(this.state, { type });
+    Object.assign(this, { type });
     return this;
   }
 
@@ -171,16 +168,17 @@ module.exports = class FieldBuilder {
      * @returns {FieldBuilder} The builder instance
      */
   optional() {
-    Object.assign(this.state, { allowNull: true });
+    Object.assign(this, { allowNull: true });
     return this;
   }
 
   /**
    * Returns a serialized object of all of the instances options.  
    * @returns 
+   * @deprecated
    */
   output() {
-    return this.state;
+    return this;
   }
 
   /**
@@ -188,7 +186,7 @@ module.exports = class FieldBuilder {
    * @returns {FieldBuilder} The builder instance 
    */
   primaryKey() {
-    Object.assign(this.state, {
+    Object.assign(this, {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
@@ -202,7 +200,7 @@ module.exports = class FieldBuilder {
    * @returns {FieldBuilder} The builder instance
    */
    required() {
-    Object.assign(this.state, { allowNull: false });
+    Object.assign(this, { allowNull: false });
     return this;
   }
 
@@ -219,7 +217,7 @@ module.exports = class FieldBuilder {
   }
 
   string() {
-    Object.assign(this.state, {
+    Object.assign(this, {
       type: Sequelize.STRING,
       default: "",
     });
@@ -227,7 +225,7 @@ module.exports = class FieldBuilder {
   }
 
   text() {
-    Object.assign(this.state, {
+    Object.assign(this, {
       type: Sequelize.TEXT,
       default: "",
     });
@@ -243,7 +241,7 @@ module.exports = class FieldBuilder {
       throw new Error('Named constraints must be a string')
     }
     
-    Object.assign(this.state, {
+    Object.assign(this, {
       unique: constraintName || true
     });
 
